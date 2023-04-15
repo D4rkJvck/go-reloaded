@@ -83,7 +83,7 @@ func Test_Functions(t *testing.T) {
 			t.Errorf(test.name+"💥\nResult -> %v\nExpected -> %v\n\n", test.input, test.expect)
 			break
 		} else {
-			fmt.Println(test.name + ": ✅\n")
+			fmt.Println("OK: ✅ "+test.name +"\n")
 			if i < len(tests)-1 {
 				tests[i+1].input = test.fix(test.input)
 			}
