@@ -73,7 +73,7 @@ func isBinary(s string) bool {
 	return true
 }
 
-func Capital(s string) string {
+func Capital(s string) string { //---					---> Deprecated but functional
 	return strings.Title(strings.ToLower(s))
 }
 

@@ -7,9 +7,10 @@ import (
 
 func ApplyInstances(s string) string {
 	t := strings.Fields(s)
-	instances := []string{"hex", "bin", "cap", "up", "low"}
-	var apply func(string) string
+	instances := []string{"hex", "bin", "cap", "up", "low"} //---					---> Gather instances
+	var apply func(string) string                           //---					---> Common function
 
+	//---> Change Function based on Instance
 	for i := range t {
 		for _, instance := range instances {
 			switch instance {
@@ -24,23 +25,25 @@ func ApplyInstances(s string) string {
 			case "low":
 				apply = strings.ToLower
 			}
+
+			//---> Single Target
 			if t[i] == "("+instance+")" {
-				for o := 1; o <= i; o++ {
-					if t[i-o] == "" {
-						continue
-					} else {
+				for o := 1; o <= i; o++ { //---					---> Manage Multiple Instances
+					if t[i-o] != "" {
 						t[i-o] = apply(t[i-o])
-						break
+						break //---					---> Avoid applying on all previous Words
 					}
 				}
 				t[i] = ""
 			}
-			if i < len(t)-1 && t[i] == "("+instance+"," && t[i+1][len(t[i+1])-1] == 41 {
-				b, err := strconv.Atoi(t[i+1][:len(t[i+1])-1])
+
+			//---> Multiple Targets
+			if i < len(t)-1 && t[i] == "("+instance+"," && t[i+1][len(t[i+1])-1] == 41 { //---> Last index must ')'
+				b, err := strconv.Atoi(t[i+1][:len(t[i+1])-1]) //---					---> Convert the entire String
 				if err == nil {
-					for d := 1; d <= i && d <= b; d++ {
+					for d := 1; d <= i && d <= b; d++ { //---					---> Manage Targets
 						if t[i-d] == "" {
-							b++
+							b++ //---					---> Manage Multiple Instances
 						} else {
 							t[i-d] = apply(t[i-d])
 						}
@@ -51,5 +54,6 @@ func ApplyInstances(s string) string {
 			}
 		}
 	}
-	return FixSpaces(strings.Join(t, " "))
+
+	return FixSpaces(strings.Join(t, " ")) //---					---> Fix Double Spaces before Returning
 }
