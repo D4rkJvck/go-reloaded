@@ -76,3 +76,8 @@ func isBinary(s string) bool {
 func Capital(s string) string {
 	return strings.Title(strings.ToLower(s))
 }
+
+func isVowel(b byte) bool {
+	v := "AaEeHhIiOoUu"
+	return strings.Contains(v, string(b))
+}

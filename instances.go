@@ -38,7 +38,7 @@ func ApplyInstances(s string) string {
 			if i < len(t)-1 && t[i] == "("+instance+"," && t[i+1][len(t[i+1])-1] == 41 {
 				b, err := strconv.Atoi(t[i+1][:len(t[i+1])-1])
 				if err == nil {
-					for d := 1; d <= b && d <= i; d++ {
+					for d := 1; d <= i && d <= b; d++ {
 						if t[i-d] == "" {
 							b++
 						} else {
