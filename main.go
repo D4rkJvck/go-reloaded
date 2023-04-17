@@ -1,8 +1,6 @@
 package main
 
-import (
-	"os"
-)
+import "os"
 
 func main() {
 	Args := os.Args[1:]
@@ -10,7 +8,7 @@ func main() {
 		content, err := os.ReadFile(Args[0]) //---					---> Access File Content from File name
 		if err == nil {
 
-			txt := string(content)//---					---> Convert for Fortmatting
+			txt := string(content) //---					---> Convert for Fortmatting
 
 			//---> Format to Correct Instances
 			txt = FixSpaces(txt)
